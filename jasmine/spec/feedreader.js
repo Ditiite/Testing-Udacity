@@ -98,7 +98,7 @@ $(function() {
             const container = document.querySelector('.feed');
             const entriesLength = container.querySelectorAll('.entry').length;
 
-            expect(entriesLength).not.toBe(0);
+            expect(entriesLength).toBeGreaterThan(0);
             done();
         });
 
@@ -123,19 +123,21 @@ $(function() {
             loadFeed(0, () => {
                 currentContentUrl = allFeeds[0].url;
                 currentContentHTML = container.innerHTML;
+                console.log('FIRST LOAD', currentContentHTML);
                 done();
             });
 
-            loadFeed(3, () => {
+            loadFeed(1, () => {
                 nextContentUrl = allFeeds[1].url;
                 nextContentHTML = container.innerHTML;
+                console.log('SECOND LOAD', nextContentHTML);
                 done();
             });
         });
 
         it('when the new feed is loaded the content of it is changed', () => {
-            expect(currentContentUrl).not.toBe(nextContentUrl);
-            expect(currentContentHTML).not.toBe(nextContentHTML);
+            expect(currentContentUrl).not.toEqual(nextContentUrl);
+            expect(currentContentHTML).not.toEqual(nextContentHTML);
         })
 
     });
