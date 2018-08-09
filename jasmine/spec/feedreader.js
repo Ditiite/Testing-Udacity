@@ -36,6 +36,8 @@ $(function() {
                 expect(feed.url).toBeDefined();
                 // Check that url is not empty
                 expect(feed.url.length).not.toBe(0);
+                // Check if it's not undefined
+                expect(feed.url).not.toBe(undefined);
             });
         });
 
@@ -48,6 +50,8 @@ $(function() {
                 expect(feed.name).toBeDefined();
                 // Check that name is not empty
                 expect(feed.name.length).not.toBe(0);
+                // Check if it's not undefined
+                expect(feed.name).not.toBe(undefined);
             })
         })
 
@@ -89,7 +93,7 @@ $(function() {
         * Check if when loadFeed function is called there is at least one entry.
         */
         beforeEach(done => {
-            loadFeed(1, () => {
+            loadFeed(0, () => {
                 done();
             });
         });
@@ -132,4 +136,13 @@ $(function() {
             expect(currentContentHTML).not.toEqual(nextContentHTML);
         })
     });
+
+    // Error handaling for out-of-bound array access
+    describe('Error handling', () => {
+        it('should throw error out-of-bound array', () => {
+            expect(() => {
+                loadFeed(4);
+            }).toThrow(new Error("Index out-of-bound"));
+        });
+    })
 }());

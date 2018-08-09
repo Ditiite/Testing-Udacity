@@ -41,8 +41,14 @@ function init() {
  * which will be called after everything has run successfully.
  */
  function loadFeed(id, cb) {
-     var feedUrl = allFeeds[id].url,
-         feedName = allFeeds[id].name;
+    
+    if (id >= allFeeds.length) {
+        throw new Error("Index out-of-bound");
+    }
+
+    var feedUrl = allFeeds[id].url,
+        feedName = allFeeds[id].name;
+         
 
      $.ajax({
        type: "POST",
