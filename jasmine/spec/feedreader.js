@@ -89,7 +89,7 @@ $(function() {
         * Check if when loadFeed function is called there is at least one entry.
         */
         beforeEach(done => {
-            loadFeed(0, () => {
+            loadFeed(1, () => {
                 done();
             });
         });
@@ -106,9 +106,7 @@ $(function() {
 
     /* New test suite named "New Feed Selection" */
     describe('New Feed Selection', () => {
-        let currentContentUrl,
-            nextContentUrl,
-            currentContentHTML,
+        let currentContentHTML,
             nextContentHTML;
 
         const container = document.querySelector('.feed');
@@ -121,24 +119,17 @@ $(function() {
             $('.feed').empty();
             
             loadFeed(0, () => {
-                currentContentUrl = allFeeds[0].url;
                 currentContentHTML = container.innerHTML;
-                console.log('FIRST LOAD', currentContentHTML);
-                done();
             });
-
+            
             loadFeed(1, () => {
-                nextContentUrl = allFeeds[1].url;
                 nextContentHTML = container.innerHTML;
-                console.log('SECOND LOAD', nextContentHTML);
                 done();
             });
         });
-
+        
         it('when the new feed is loaded the content of it is changed', () => {
-            expect(currentContentUrl).not.toEqual(nextContentUrl);
             expect(currentContentHTML).not.toEqual(nextContentHTML);
         })
-
     });
 }());
