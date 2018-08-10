@@ -67,7 +67,7 @@ $(function() {
         * Check if the side-menu by default is hidden 
         */
         it('is hidden by default', () => {
-            expect(body.className).toContain('menu-hidden');
+            expect(body.classList).toContain('menu-hidden');
         });
 
         /* 
@@ -79,11 +79,11 @@ $(function() {
 
             // Check if menu-hidden class is removed on click
             menuIcon.click();
-            expect(body.className).not.toContain('menu-hidden');
+            expect(body.classList).not.toContain('menu-hidden');
 
             // Check if menu-hidden class is added on click
             menuIcon.click();
-            expect(body.className).toContain('menu-hidden');
+            expect(body.classList).toContain('menu-hidden');
         });
     });
 
@@ -124,15 +124,16 @@ $(function() {
             
             loadFeed(0, () => {
                 currentContentHTML = container.innerHTML;
-            });
-            
-            loadFeed(1, () => {
-                nextContentHTML = container.innerHTML;
-                done();
-            });
+                loadFeed(1, () => {
+                    nextContentHTML = container.innerHTML;
+                    done();
+                });
+            });     
         });
         
         it('when the new feed is loaded the content of it is changed', () => {
+            console.log('Current', currentContentHTML);
+            console.log('Next', nextContentHTML);
             expect(currentContentHTML).not.toEqual(nextContentHTML);
         })
     });
