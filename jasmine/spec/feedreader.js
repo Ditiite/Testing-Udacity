@@ -132,8 +132,6 @@ $(function() {
         });
         
         it('when the new feed is loaded the content of it is changed', () => {
-            console.log('Current', currentContentHTML);
-            console.log('Next', nextContentHTML);
             expect(currentContentHTML).not.toEqual(nextContentHTML);
         })
     });
